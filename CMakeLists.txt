@@ -4,9 +4,9 @@ project(LearningQtExamples)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(Qt5 COMPONENTS Network REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Widgets Network REQUIRED)
 
 # sub directories
-# add_subdirectory(network_exp)
-# target_link_libraries(mytarget Qt5::Network)
+add_subdirectory(qt_network)
+
 
