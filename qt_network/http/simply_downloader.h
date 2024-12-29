@@ -1,5 +1,3 @@
-#include <qnetworkreply.h>
-#include <qprogressbar.h>
 #include <QFile>
 #include <QLineEdit>
 #include <QMainWindow>

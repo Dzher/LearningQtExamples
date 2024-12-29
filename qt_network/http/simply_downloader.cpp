@@ -1,16 +1,8 @@
 #include "simply_downloader.h"
-#include <qboxlayout.h>
-#include <qlabel.h>
-#include <qlayoutitem.h>
-#include <qlineedit.h>
-#include <qnetworkaccessmanager.h>
-#include <qnetworkreply.h>
-#include <qnetworkrequest.h>
-#include <qprogressbar.h>
-#include <qpushbutton.h>
-#include <qwidget.h>
+#include <QBoxLayout>
 #include <QFileInfo>
 #include <QLabel>
+#include <QWidget>
 
 using namespace eg_network;
 
