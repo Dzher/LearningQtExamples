@@ -46,7 +46,7 @@ void SimplyDownloader::signalConnect() {
 }
 
 void SimplyDownloader::onDownload() {
-    url_ = url_input_->text();
+    url_ = url_input_->text(); // if want ftp service, change the http url to "ftp://your_ftp_server/path/to/file"
 
     QFileInfo info(url_.path());
     QString file_name(info.fileName());
