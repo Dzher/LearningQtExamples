@@ -1,5 +1,10 @@
 #include "broadcast_client.h"
+#include <qobject.h>
+#include <qpushbutton.h>
 #include <QHBoxLayout>
+#include <QHostAddress>
+#include <QHostInfo>
+#include <QNetworkInterface>
 #include <QVBoxLayout>
 
 using namespace eg_network;

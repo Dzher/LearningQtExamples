@@ -1,12 +1,5 @@
 #include "broadcast_server.h"
-#include <qhostaddress.h>
-#include <qlabel.h>
-#include <qobject.h>
-#include <qudpsocket.h>
-#include <QHBoxLayout>
-#include <QHostAddress>
-#include <QHostInfo>
-#include <QNetworkInterface>
+
 #include <QVBoxLayout>
 
 using namespace eg_network;
