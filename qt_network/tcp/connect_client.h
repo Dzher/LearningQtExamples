@@ -1,22 +1,26 @@
+#include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QUdpSocket>
+#include <QTcpSocket>
 #include <QWidget>
 
 namespace eg_network
 {
-class BroadcastClient : public QWidget
+class ConnectClient : public QWidget
 {
 public:
-    BroadcastClient();
+    ConnectClient();
 
 private:
     void initUi();
     void signalConnect();
 
 private:
-    QUdpSocket* sender_;
-    QLineEdit* content_input_ = nullptr;
-    QPushButton* broadcast_btn_ = nullptr;
+    QTcpSocket* connecter_;
+    QLineEdit* host_input_ = nullptr;
+    QLineEdit* port_input_ = nullptr;
+    QPushButton* connect_btn_ = nullptr;
+    QLabel* content_label_ = nullptr;
+    int data_block_size_;
 };
 }  // namespace eg_network
