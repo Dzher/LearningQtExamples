@@ -1,16 +1,16 @@
-#include "broadcast_client.h"
+#include "broadcast_sender.h"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 
 using namespace eg_network;
 
-BroadcastClient::BroadcastClient() {
+BroadcastSender::BroadcastSender() {
     sender_ = new QUdpSocket(this);
     initUi();
     signalConnect();
 }
 
-void BroadcastClient::initUi() {
+void BroadcastSender::initUi() {
     setMinimumSize(300, 120);
 
     auto* input_h_layout = new QHBoxLayout;
@@ -26,12 +26,14 @@ void BroadcastClient::initUi() {
     setLayout(main_layout);
 }
 
-void BroadcastClient::signalConnect() {
+void BroadcastSender::signalConnect() {
     connect(broadcast_btn_, &QPushButton::clicked, this,
             [this]()
             {
                 QString broadcast_content = content_input_->text();
                 QByteArray send_data = broadcast_content.toLocal8Bit();
-                sender_->writeDatagram(send_data.data(), send_data.size(), QHostAddress::Broadcast, 7777);
+                sender_->writeDatagram(send_data.constData(), QHostAddress::Broadcast, 7777);
+                // or you can use the method below
+                // sender_->writeDatagram(send_data.data(), send_data.size(), QHostAddress::Broadcast, 7777);
             });
 }

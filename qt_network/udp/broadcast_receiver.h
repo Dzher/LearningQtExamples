@@ -5,10 +5,10 @@
 
 namespace eg_network
 {
-class BroadcastServer : public QWidget
+class BroadcastReceiver : public QWidget
 {
 public:
-    BroadcastServer();
+    BroadcastReceiver();
 
 private:
     void initUi();

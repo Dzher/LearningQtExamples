@@ -1,17 +1,17 @@
 #include <QApplication>
-#include "broadcast_client.h"
-#include "broadcast_server.h"
+#include "broadcast_sender.h"
+#include "broadcast_receiver.h"
 
 using namespace eg_network;
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
-    BroadcastClient client;
-    client.show();
+    BroadcastSender sender;
+    sender.show();
 
-    BroadcastServer server;
-    server.show();
+    BroadcastReceiver receiver;
+    receiver.show();
 
     return QApplication::exec();
 }

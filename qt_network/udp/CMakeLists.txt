@@ -1,9 +1,9 @@
 set(BROADCAST
     bc_main.cpp
-    broadcast_client.cpp
-    broadcast_client.h
-    broadcast_server.cpp
-    broadcast_server.h
+    broadcast_sender.cpp
+    broadcast_sender.h
+    broadcast_receiver.cpp
+    broadcast_receiver.h
 )
 
 qt5_wrap_cpp(BROADCAST_MOC_FILES ${BROADCAST})

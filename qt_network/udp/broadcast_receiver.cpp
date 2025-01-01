@@ -1,10 +1,10 @@
-#include "broadcast_server.h"
+#include "broadcast_receiver.h"
 
 #include <QVBoxLayout>
 
 using namespace eg_network;
 
-BroadcastServer::BroadcastServer() {
+BroadcastReceiver::BroadcastReceiver() {
     receiver_ = new QUdpSocket(this);
     receiver_->bind(7777, QUdpSocket::ShareAddress);
 
@@ -12,7 +12,7 @@ BroadcastServer::BroadcastServer() {
     signalConnect();
 }
 
-void BroadcastServer::initUi() {
+void BroadcastReceiver::initUi() {
     setMinimumSize(300, 220);
 
     content_label_ = new QLabel("Wait for broadcast data...");
@@ -23,7 +23,7 @@ void BroadcastServer::initUi() {
     setLayout(main_layout);
 }
 
-void BroadcastServer::signalConnect() {
+void BroadcastReceiver::signalConnect() {
     connect(receiver_, &QUdpSocket::readyRead, this,
             [this]()
             {
