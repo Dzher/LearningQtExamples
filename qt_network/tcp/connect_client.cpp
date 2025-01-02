@@ -1,15 +1,6 @@
 #include "connect_client.h"
-#include <qglobal.h>
-#include <qlabel.h>
-#include <qlayoutitem.h>
-#include <qobject.h>
-#include <qpushbutton.h>
-#include <qsizepolicy.h>
-#include <qtcpsocket.h>
+#include <QDebug>
 #include <QHBoxLayout>
-#include <QHostAddress>
-#include <QHostInfo>
-#include <QNetworkInterface>
 #include <QVBoxLayout>
 
 using namespace eg_network;
@@ -59,13 +50,19 @@ void ConnectClient::signalConnect() {
                 QDataStream in{connecter_};
                 in.setVersion(QDataStream::Qt_5_13);
 
+                qint64 incoming_data_size = connecter_->bytesAvailable();
                 if (data_block_size_ == 0) {
-                    if (connecter_->bytesAvailable() < (int)sizeof(quint16)) {
+                    // data block size is less than data block header size
+                    if (incoming_data_size < sizeof(quint16)) {
+                        qDebug() << "Error: the number of incoming bytes that are waiting to be read is too less";
                         return;
                     }
                     in >> data_block_size_;
+                    qDebug() << "block size is " << data_block_size_;
                 }
-                if (connecter_->bytesAvailable() < data_block_size_) {
+                // data size is less than the size recorded in data block header
+                if (incoming_data_size < data_block_size_) {
+                    qDebug() << "Error: the number of incoming bytes you transfor is incompleted";
                     return;
                 }
 
@@ -87,5 +84,6 @@ void ConnectClient::signalConnect() {
 
                 connecter_->abort();
                 connecter_->connectToHost(host_input_->text(), port_input_->text().toInt());
+                // connecter_.bind()
             });
 }

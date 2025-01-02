@@ -21,6 +21,6 @@ private:
     QLineEdit* port_input_ = nullptr;
     QPushButton* connect_btn_ = nullptr;
     QLabel* content_label_ = nullptr;
-    int data_block_size_;
+    quint16 data_block_size_;
 };
 }  // namespace eg_network

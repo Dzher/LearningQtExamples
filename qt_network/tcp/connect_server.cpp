@@ -38,7 +38,7 @@ void ConnectServer::signalConnect() {
                 out.setVersion(QDataStream::Qt_5_13);
 
                 out << quint16(0);
-                out << "Hello New Connection!!!";
+                out << QString{"Hello New Connection!!!"}; //Must use QString, just "" will cause garbled issue.
                 out.device()->seek(0);
                 out << quint16(data_block.size() - sizeof(quint16));
 
