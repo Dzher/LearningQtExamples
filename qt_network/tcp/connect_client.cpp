@@ -76,6 +76,7 @@ void ConnectClient::signalConnect() {
             {
                 qDebug() << "Error: " << error;
                 qDebug() << "Error: " << connecter_->errorString();
+                close();
             });
     connect(connect_btn_, &QPushButton::clicked, this,
             [this]()
@@ -84,6 +85,7 @@ void ConnectClient::signalConnect() {
 
                 connecter_->abort();
                 connecter_->connectToHost(host_input_->text(), port_input_->text().toInt());
-                // connecter_.bind()
+                // QHostAddress address{host_input_->text()};
+                // connecter_->bind(address, port_input_->text().toInt());
             });
 }
