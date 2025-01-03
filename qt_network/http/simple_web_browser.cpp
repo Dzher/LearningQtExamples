@@ -1,11 +1,11 @@
-#include "simply_web_browser.h"
 #include <QTextCodec>
+#include "simple_web_browser.h"
 
 #include <QVBoxLayout>
 
 using namespace eg_network;
 
-SimplyWebBrowser::SimplyWebBrowser() {
+SimpleWebBrowser::SimpleWebBrowser() {
     manager_ = new QNetworkAccessManager(this);
     text_browser_ = new QTextBrowser(this);
 
@@ -13,20 +13,20 @@ SimplyWebBrowser::SimplyWebBrowser() {
     signalConnect();
 }
 
-void SimplyWebBrowser::initUi() {
+void SimpleWebBrowser::initUi() {
     setFixedSize(800, 600);
     setCentralWidget(text_browser_);
 }
 
-void SimplyWebBrowser::signalConnect() {
-    connect(manager_, &QNetworkAccessManager::finished, this, &SimplyWebBrowser::replyFinished);
+void SimpleWebBrowser::signalConnect() {
+    connect(manager_, &QNetworkAccessManager::finished, this, &SimpleWebBrowser::replyFinished);
 }
 
-void SimplyWebBrowser::get(const QString& url) {
+void SimpleWebBrowser::get(const QString& url) {
     manager_->get(QNetworkRequest(QUrl(url)));
 }
 
-void SimplyWebBrowser::replyFinished(QNetworkReply* reply) {
+void SimpleWebBrowser::replyFinished(QNetworkReply* reply) {
     QTextCodec* codec = QTextCodec::codecForName("utf8");
     QString content = codec->toUnicode(reply->readAll());
     text_browser_->setText(content);

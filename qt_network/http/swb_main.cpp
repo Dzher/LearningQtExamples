@@ -1,11 +1,11 @@
 #include <QApplication>
-#include "simply_web_browser.h"
+#include "simple_web_browser.h"
 
 using namespace eg_network;
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
-    SimplyWebBrowser browser;
+    SimpleWebBrowser browser;
     browser.show();
     browser.get("https://github.com/Dzher/LearningQtExamples");
     return QApplication::exec();

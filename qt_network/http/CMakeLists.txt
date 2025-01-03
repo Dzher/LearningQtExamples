@@ -1,37 +1,37 @@
-set(SIMPLY_WEB_BROWSER
+set(SIMPLE_WEB_BROWSER
     swb_main.cpp
-    simply_web_browser.cpp
-    simply_web_browser.h
+    simple_web_browser.cpp
+    simple_web_browser.h
 )
 
-qt5_wrap_cpp(SIMPLY_WEB_BROWSER_MOC_FILES ${SIMPLY_WEB_BROWSER})
+qt5_wrap_cpp(SIMPLE_WEB_BROWSER_MOC_FILES ${SIMPLE_WEB_BROWSER})
 
-add_executable(simply_web_browser 
-                                ${SIMPLY_WEB_BROWSER}
-                                ${SIMPLY_WEB_BROWSER_MOC_FILES}
+add_executable(simple_web_browser 
+                                ${SIMPLE_WEB_BROWSER}
+                                ${SIMPLE_WEB_BROWSER_MOC_FILES}
 )
 
-target_link_libraries(simply_web_browser 
+target_link_libraries(simple_web_browser 
                                         Qt5::Core 
                                         Qt5::Gui 
                                         Qt5::Widgets 
                                         Qt5::Network
 )
 #================================================================================
-set(SIMPLY_DOWNLOADER
+set(SIMPLE_DOWNLOADER
     sd_main.cpp
-    simply_downloader.cpp
-    simply_downloader.h
+    simple_downloader.cpp
+    simple_downloader.h
 )
 
-qt5_wrap_cpp(SIMPLY_DOWNLOADER_MOC_FILES ${SIMPLY_DOWNLOADER})
+qt5_wrap_cpp(SIMPLE_DOWNLOADER_MOC_FILES ${SIMPLE_DOWNLOADER})
 
-add_executable(simply_downloader 
-                                ${SIMPLY_DOWNLOADER}
-                                ${SIMPLY_DOWNLOADER_MOC_FILES}
+add_executable(simple_downloader 
+                                ${SIMPLE_DOWNLOADER}
+                                ${SIMPLE_DOWNLOADER_MOC_FILES}
 )
 
-target_link_libraries(simply_downloader 
+target_link_libraries(simple_downloader 
                                         Qt5::Core 
                                         Qt5::Gui 
                                         Qt5::Widgets 

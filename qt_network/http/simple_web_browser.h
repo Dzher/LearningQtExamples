@@ -5,10 +5,10 @@
 
 namespace eg_network
 {
-class SimplyWebBrowser : public QMainWindow
+class SimpleWebBrowser : public QMainWindow
 {
 public:
-    SimplyWebBrowser();
+    SimpleWebBrowser();
     void get(const QString& url = "http://www.qter.org");
 
 private:

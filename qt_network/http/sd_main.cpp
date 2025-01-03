@@ -1,11 +1,11 @@
 #include <QApplication>
-#include "simply_downloader.h"
+#include "simple_downloader.h"
 
 using namespace eg_network;
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
-    SimplyDownloader downloader;
+    SimpleDownloader downloader;
     downloader.show();
     return QApplication::exec();
 }

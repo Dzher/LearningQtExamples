@@ -8,10 +8,10 @@
 
 namespace eg_network
 {
-class SimplyDownloader : public QMainWindow
+class SimpleDownloader : public QMainWindow
 {
 public:
-    SimplyDownloader();
+    SimpleDownloader();
 
 private:
     void initUi();

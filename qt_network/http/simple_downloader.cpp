@@ -1,18 +1,18 @@
-#include "simply_downloader.h"
 #include <QBoxLayout>
 #include <QFileInfo>
 #include <QLabel>
 #include <QWidget>
+#include "simple_downloader.h"
 
 using namespace eg_network;
 
-SimplyDownloader::SimplyDownloader() {
+SimpleDownloader::SimpleDownloader() {
     manager_ = new QNetworkAccessManager(this);
     initUi();
     signalConnect();
 }
 
-void SimplyDownloader::initUi() {
+void SimpleDownloader::initUi() {
     setMinimumSize(600, 150);
 
     auto* main_widget = new QWidget();
@@ -41,12 +41,12 @@ void SimplyDownloader::initUi() {
     setCentralWidget(main_widget);
 }
 
-void SimplyDownloader::signalConnect() {
-    connect(download_btn_, &QPushButton::clicked, this, &SimplyDownloader::onDownload);
+void SimpleDownloader::signalConnect() {
+    connect(download_btn_, &QPushButton::clicked, this, &SimpleDownloader::onDownload);
 }
 
-void SimplyDownloader::onDownload() {
-    url_ = url_input_->text(); // if want ftp service, change the http url to "ftp://your_ftp_server/path/to/file"
+void SimpleDownloader::onDownload() {
+    url_ = url_input_->text();  // if want ftp service, change the http url to "ftp://your_ftp_server/path/to/file"
 
     QFileInfo info(url_.path());
     QString file_name(info.fileName());
@@ -61,15 +61,15 @@ void SimplyDownloader::onDownload() {
         return;
     }
     reply_ = manager_->get(QNetworkRequest(url_));
-    connect(reply_, &QNetworkReply::readyRead, this, &SimplyDownloader::onHttpReadyRead);
-    connect(reply_, &QNetworkReply::downloadProgress, this, &SimplyDownloader::onUpdateProgress);
-    connect(reply_, &QNetworkReply::finished, this, &SimplyDownloader::onDownloadFinished);
+    connect(reply_, &QNetworkReply::readyRead, this, &SimpleDownloader::onHttpReadyRead);
+    connect(reply_, &QNetworkReply::downloadProgress, this, &SimpleDownloader::onUpdateProgress);
+    connect(reply_, &QNetworkReply::finished, this, &SimpleDownloader::onDownloadFinished);
 
     download_progress_->setValue(0);
     download_progress_->show();
 }
 
-void SimplyDownloader::onDownloadFinished() {
+void SimpleDownloader::onDownloadFinished() {
     download_progress_->hide();
 
     download_file_->flush();
@@ -81,13 +81,13 @@ void SimplyDownloader::onDownloadFinished() {
     reply_ = nullptr;
 }
 
-void SimplyDownloader::onHttpReadyRead() {
+void SimpleDownloader::onHttpReadyRead() {
     if (download_file_) {
         download_file_->write(reply_->readAll());
     }
 }
 
-void SimplyDownloader::onUpdateProgress(qint64 bytesReceived, qint64 bytesTotal) {
+void SimpleDownloader::onUpdateProgress(qint64 bytesReceived, qint64 bytesTotal) {
     download_progress_->setMaximum(int(bytesTotal));
     download_progress_->setValue(int(bytesReceived));
 }
