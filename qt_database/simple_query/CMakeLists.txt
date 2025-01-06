@@ -1,6 +1,6 @@
 set(SIMPLE_QUERY
     main.cpp
-    create_connection.h
+    connection.h
     query_widget.cpp
     query_widget.h
 )

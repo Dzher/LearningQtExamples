@@ -1,10 +1,8 @@
 #include "query_widget.h"
-#include <qglobal.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
-#include <qsqlquery.h>
+#include "connection.h"
+
 #include <QDebug>
-#include "create_connection.h"
+#include <QSqlQuery>
 
 using namespace eg_sql;
 

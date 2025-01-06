@@ -1,4 +1,3 @@
-#include <qsqldatabase.h>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QtWidgets/QMessageBox>
@@ -7,7 +6,7 @@ namespace eg_sql
 {
 
 inline QString getDatabaseName() {
-    return "MyFirstDb";
+    return "MyFirstDb.db";
 }
 
 inline QString getConnectionName() {
@@ -22,7 +21,7 @@ inline bool createConnection() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", getConnectionName());
     db.setDatabaseName("MyFirstDb");
     if (!db.open()) {
-        QMessageBox::critical(0, "Cannot Open Database", "Unable to establisha database connection.",
+        QMessageBox::critical(0, "Cannot Open Database", "Unable to establish a database connection.",
                               QMessageBox::Cancel);
         return false;
     }

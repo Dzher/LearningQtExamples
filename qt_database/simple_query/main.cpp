@@ -1,5 +1,5 @@
 #include <QApplication>
-#include "create_connection.h"
+#include "connection.h"
 #include "query_widget.h"
 
 int main(int argc, char* argv[]) {
