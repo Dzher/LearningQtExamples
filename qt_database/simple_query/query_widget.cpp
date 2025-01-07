@@ -17,6 +17,7 @@ QueryWidget::QueryWidget(QWidget* parent) : QMainWindow(parent) {
 }
 
 void QueryWidget::initUi() {
+    setMinimumWidth(300);
     auto* main_widget = new QWidget;
 
     auto* query_h_lyt = new QHBoxLayout;
