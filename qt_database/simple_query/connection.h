@@ -21,7 +21,7 @@ inline bool createConnection() {
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", getConnectionName());
     db.setDatabaseName("MyFirstDb");
     if (!db.open()) {
-        QMessageBox::critical(0, "Cannot Open Database", "Unable to establish a database connection.",
+        QMessageBox::critical(nullptr, "Cannot Open Database", "Unable to establish a database connection.",
                               QMessageBox::Cancel);
         return false;
     }

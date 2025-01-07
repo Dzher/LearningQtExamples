@@ -12,12 +12,16 @@ public:
 private:
     void initUi();
     void onSignalConnect() const;
-    void onQuery();
+    void onQuery() const;
+    void onInsert() const;
+    void onDebug();
 
 private:
     struct
     {
         QPushButton* query_btn = nullptr;
+        QPushButton* insert_btn = nullptr;
+        QPushButton* debug_btn = nullptr;
         QSpinBox* index_box = nullptr;
     } ui_;
 };
