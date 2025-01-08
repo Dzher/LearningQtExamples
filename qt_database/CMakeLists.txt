@@ -1,3 +1,4 @@
 add_subdirectory(get_db_info)
 add_subdirectory(simple_db_test)
 add_subdirectory(simple_query)
+add_subdirectory(simple_query_model)
