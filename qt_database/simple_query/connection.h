@@ -1,9 +1,11 @@
+#include <QDebug>
+#include <QFile>
+#include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
 #include <QVariantList>
-#include <QtWidgets/QMessageBox>
 
 namespace eg_sql
 {
@@ -22,16 +24,26 @@ inline QSqlDatabase getDatabase() {
 }
 
 inline bool createConnection() {
-    QSqlDatabase db = getDatabase();
-    if (!db.isValid()) {
-        db = QSqlDatabase::addDatabase("QSQLITE", getConnectionName());
-        db.setDatabaseName(getDatabaseName());
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", getConnectionName());
+
+    bool db_exist = false;
+    QString database_name = getDatabaseName();
+    if (QFile::exists(database_name)) {
+        qDebug() << database_name << "has been already inited...";
+        db_exist = true;
     }
+
+    // if not exist, create it
+    db.setDatabaseName(database_name);
 
     if (!db.open()) {
         QMessageBox::critical(nullptr, "Cannot Open Database", "Unable to establish a database connection.",
                               QMessageBox::Cancel);
         return false;
+    }
+
+    if (db_exist) {
+        return true;
     }
 
     QSqlQuery query(db);
@@ -71,8 +83,9 @@ inline bool createConnection() {
           << "xiaoxin";
     query.addBindValue(ids);
     query.addBindValue(names);
+
     if (!query.execBatch()) {
-        // if isn't a memory database, the below will return false
+        // if isn't a memory database, the below will return false (Dropped)
         QMessageBox::critical(nullptr, "Cannot Init Database", query.lastError().text(), QMessageBox::Cancel);
         return false;
     }
