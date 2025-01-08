@@ -9,7 +9,8 @@ namespace eg_sql
 {
 
 inline QString getDatabaseName() {
-    return "MyFirstDb.db";
+    // return "MyFirstDb.db";
+    return ":memory:";  // a temporary database just live in memory
 }
 
 inline QString getConnectionName() {
@@ -24,7 +25,7 @@ inline bool createConnection() {
     QSqlDatabase db = getDatabase();
     if (!db.isValid()) {
         db = QSqlDatabase::addDatabase("QSQLITE", getConnectionName());
-        db.setDatabaseName("MyFirstDb");
+        db.setDatabaseName(getDatabaseName());
     }
 
     if (!db.open()) {
@@ -71,8 +72,9 @@ inline bool createConnection() {
     query.addBindValue(ids);
     query.addBindValue(names);
     if (!query.execBatch()) {
-        // QMessageBox::critical(nullptr, "Cannot Init Database", query.lastError().text(), QMessageBox::Cancel);
-        // return false;
+        // if isn't a memory database, the below will return false
+        QMessageBox::critical(nullptr, "Cannot Init Database", query.lastError().text(), QMessageBox::Cancel);
+        return false;
     }
     return true;
 }
