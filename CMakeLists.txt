@@ -15,5 +15,6 @@ find_package(Qt5 COMPONENTS
 # sub directories
 add_subdirectory(qt_network)
 add_subdirectory(qt_database)
+add_subdirectory(qt_file)
 
 

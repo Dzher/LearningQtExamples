@@ -1,0 +1,1 @@
+add_subdirectory(get_file_info)
