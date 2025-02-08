@@ -1,9 +1,4 @@
-#include <qapplication.h>
-#include <qbuffer.h>
-#include <qdebug.h>
-#include <qglobal.h>
-#include <qobject.h>
-#include <qpalette.h>
+#include <QApplication>
 #include <QBuffer>
 #include <QByteArray>
 #include <QDataStream>
