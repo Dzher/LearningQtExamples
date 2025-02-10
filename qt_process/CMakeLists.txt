@@ -1,1 +1,2 @@
 add_subdirectory(use_process)
+add_subdirectory(ipc_by_sharememory)
