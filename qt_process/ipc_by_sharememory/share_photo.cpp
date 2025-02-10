@@ -82,6 +82,9 @@ private:
                         return;
                     }
 
+                    // 在QBuffer使用setData之前，不需要调用open()
+                    // QBuffer的setData()函数会直接将数据设置到缓冲区中，并自动调整缓冲区的大小
+                    // open()函数主要用于打开设备进行读写操作，而setData()已经完成了数据的写入，因此不需要再打开缓冲区
                     QBuffer buffer;
                     QDataStream data(&buffer);
                     load_shared_memory_->lock();
@@ -99,7 +102,8 @@ private:
     }
 
 private:
-    // different funcs or processes should use different qsharedmemory objects
+    // different funcs or processes should use different qsharedmemory objects, 
+    // and attention have at least one shared memory is alive for the special key when need shared
     // QSharedMemory* shared_memory_ = nullptr;
     QPushButton* save_btn_ = nullptr;
     QPushButton* load_btn_ = nullptr;
