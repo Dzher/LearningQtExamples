@@ -6,12 +6,14 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QWidget>
-class ClockTickTock;
-class ClockTickTock : public QThread
+
+static int sec = 0;
+
+class NumberCounter : public QThread
 {
     Q_OBJECT
 public:
-    explicit ClockTickTock(QObject* parent = nullptr) : QThread(parent) {
+    explicit NumberCounter(QObject* parent = nullptr) : QThread(parent) {
     }
 
 protected:
@@ -29,7 +31,7 @@ class LCDWidget : public QMainWindow
     Q_OBJECT
 public:
     explicit LCDWidget(QWidget* parent = nullptr)
-        : QMainWindow(parent), working_thread_(new ClockTickTock(parent)), timer_(new QTimer(parent)) {
+        : QMainWindow(parent), working_thread_(new NumberCounter(parent)), timer_(new QTimer(parent)) {
         initUi();
         signalConnect();
     }
@@ -48,26 +50,25 @@ private:
     }
 
     void signalConnect() {
-        connect(timer_, &QTimer::timeout, this,
-                [this]()
-                {
-                    static int sec = 0;
-                    lcd_->display(QString::number(sec++));
-                });
+        connect(timer_, &QTimer::timeout, this, [this]() { lcd_->display(QString::number(sec++)); });
         connect(start_btn_, &QPushButton::clicked, this,
                 [this]
                 {
-                    timer_->start(1);
+                    timer_->start(1000);
                     working_thread_->start();
                 });
-        connect(working_thread_, &ClockTickTock::finished, working_thread_, &ClockTickTock::deleteLater);
-        connect(working_thread_, &ClockTickTock::done, this, [this] { timer_->stop(); });
+        connect(working_thread_, &NumberCounter::done, this,
+                [this]
+                {
+                    timer_->stop();
+                });
+        // connect(working_thread_, &NumberCounter::finished, working_thread_, &NumberCounter::deleteLater);
     }
 
 private:
     QLCDNumber* lcd_ = nullptr;
     QPushButton* start_btn_ = nullptr;
-    ClockTickTock* working_thread_ = nullptr;
+    NumberCounter* working_thread_ = nullptr;
     QTimer* timer_ = nullptr;
 };
 
