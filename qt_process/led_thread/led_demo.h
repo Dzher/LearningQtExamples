@@ -9,21 +9,21 @@
 
 static int sec = 0;
 
-class NumberCounter : public QThread
+class WatcherThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit NumberCounter(QObject* parent = nullptr) : QThread(parent) {
+    explicit WatcherThread(QObject* parent = nullptr) : QThread(parent) {
     }
 
 protected:
     void run() override {
         for (int i = 0; i < 1000000000; ++i) {
         }
-        emit done();
+        emit updateTime();
     }
 signals:
-    void done();
+    void updateTime();
 };
 
 class LCDWidget : public QMainWindow
@@ -31,7 +31,7 @@ class LCDWidget : public QMainWindow
     Q_OBJECT
 public:
     explicit LCDWidget(QWidget* parent = nullptr)
-        : QMainWindow(parent), working_thread_(new NumberCounter(parent)), timer_(new QTimer(parent)) {
+        : QMainWindow(parent), watcher_thread_(new WatcherThread(parent)), timer_(new QTimer(parent)) {
         initUi();
         signalConnect();
     }
@@ -55,20 +55,16 @@ private:
                 [this]
                 {
                     timer_->start(1000);
-                    working_thread_->start();
+                    watcher_thread_->start();
                 });
-        connect(working_thread_, &NumberCounter::done, this,
-                [this]
-                {
-                    timer_->stop();
-                });
+        connect(watcher_thread_, &WatcherThread::updateTime, this, [this] { timer_->stop(); });
         // connect(working_thread_, &NumberCounter::finished, working_thread_, &NumberCounter::deleteLater);
     }
 
 private:
     QLCDNumber* lcd_ = nullptr;
     QPushButton* start_btn_ = nullptr;
-    NumberCounter* working_thread_ = nullptr;
+    WatcherThread* watcher_thread_ = nullptr;
     QTimer* timer_ = nullptr;
 };
 
