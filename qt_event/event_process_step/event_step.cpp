@@ -60,6 +60,8 @@ private:
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     MyWidget widget;
+    // if you want to rewrite mouseMoveEvent, should make attribute mouse tracking true!
+    // widget.setMouseTracking(true);
     widget.installEventFilter(new GlobalEventFilter(&widget, &widget));
     widget.show();
     return QApplication::exec();
