@@ -17,5 +17,6 @@ add_subdirectory(qt_network)
 add_subdirectory(qt_database)
 add_subdirectory(qt_file)
 add_subdirectory(qt_process)
+add_subdirectory(qt_event)
 
 
